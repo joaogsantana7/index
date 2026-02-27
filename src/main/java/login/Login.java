@@ -4,36 +4,60 @@
  */
 package login;
 
-import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.annotation.WebServlet;
+
+import connection.ConnectionFactory;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
 
 /**
  *
- * @author 232.003479
+ * @author EJADEN0058
  */
 @WebServlet("/login")
-public class Login extends HttpServlet{
-    
+public class Login extends HttpServlet {
+
     private static final long serialVersionUID = 1L;
-    
+
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-    
-        String usuario = request.getParameter("users");
-        String senha = request.getParameter("passw");
-        
-        response.setContentType("text/html");
+
+        String usuario = request.getParameter("inputUser");
+        String senha = request.getParameter("inputPassword");
+
+        response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        
-        try (var con = ConnectionFactory.getConnect){
-            
+
+        try (var con = ConnectionFactory.getConnection()) {
+
+            String sql = "SELECT * FROM users WHERE username = ? AND password = ?";
+
+            PreparedStatement stmt = con.prepareStatement(sql);
+            stmt.setString(1, usuario);
+            stmt.setString(2, senha);
+
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+
+                // Login OK → redireciona
+                response.sendRedirect("dashboard.html");
+
+            } else {
+                out.println("<h2>Usuário ou senha inválidos</h2>");
+            }
+
         } catch (Exception e) {
+            e.printStackTrace();
+            out.println("<h2>Erro ao conectar com o banco de dados</h2>");
         }
-        
-    }  
+    }
 }
