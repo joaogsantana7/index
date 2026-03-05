@@ -8,8 +8,8 @@
     </head>
     <body>
         !<!-- Cabeçalho -->
-        <header>
-            <h1>SISTEMA DE ESTOQUE</h1>
+        <header id="header">
+            <h1 id="tituloDashboard">SISTEMA DE ESTOQUE</h1>
             <nav>
                 <ul>
                     <li><a href="#">Inicio</a></li>
@@ -20,39 +20,44 @@
             </nav>
         </header>
         <main>
-            <section>
-                <div>
-                    <h2>entrada</h2>
-                    <p>1.80</p>
+            <section id="resumoEstoque">
+                <div id="card-resumo">
+                    <h2 class="tituko-card">entrada</h2>
+                    <p class="valor-card">100</p>
                 </div>
-                <div>Saída</div>
-                <p>80</p>
-            </section>
-            <section>
-                <div>
-                    <label>Data</label>
-                    <input type="date" name="data">
+                <div id="card-resumo">
+                    <h2 class="tituko-card">saida</h2>
+                    <p class="valor-card">80</p>
                 </div>
-                <div>
-                    <label>Tipo</label>
-                    <select id="69">
-                        <option value="first">Selecione uma opção</option>
-                        <option value="second">Entrada</option>
-                        <option value="third">Saída</option>
-                    </select>
-                </div>
-                <div>
-                    <label>Selecionar itens</label>
-                    <input type="text" placeholder="">
-                    
-                </div>
-                <div>
-                    <button>Pesquisar</button>
+                <div id="card-resumo">
+                    <h2 class="tituko-card">todal</h2>
+                    <p class="valor-card">20</p>
                 </div>
             </section>
-            <section>
-                <div>
-                    <table>
+            <section id="filtro">
+                <div class="grupo-filtro">
+                    <label for="filtroData">Data</label>
+                    <input type="date" id="filtroData" class="input-filtro">
+                </div>
+                <div class="grupo-filtro">
+                    <label for="tipoMovimentacao">Tipo</label>
+                    <select id="tipoMovimentacao" class="select-filtro">
+                        <option value="">Selecione uma opção</option>
+                        <option value="entrada">Entrada</option>
+                        <option value="saida">Saída</option>
+            </select>
+                </div>
+                <div class="grupo-filtro pesquisa-name">
+                    <label for="pesquisarNome">Selecionar itens</label>
+                    <input type="text" id="pesquisarNome" class="input-filtro">
+                </div>
+                <div class="grupo-filtro botao-pesquisa">
+                    <button id="btnPesquisa">Pesquisar</button>
+                </div>
+            </section>
+            <section id="tabelaEstoqueConteiner">
+                <div class="tabela-wrapper">
+                    <table id="tabelaEstoque">
                         <thead>
                             <tr>
                                 <th>Codigo de barras</th>
@@ -64,8 +69,8 @@
                                 <th>Total vendidos</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
+                        <tbody id="corpoTabela">
+                            <tr class="linha-item">
                                 <td>12345678</td>
                                 <td>Mouse</td>
                                 <td>Logistech</td>
@@ -74,7 +79,7 @@
                                 <td>R$80,00</td>
                                 <td>R$800,00</td>
                             </tr>
-                            <tr>
+                            <tr class="linha-item">
                                 <td>8765432321</td>
                                 <td>Teclado</td>
                                 <td>Logistech</td>
@@ -87,19 +92,19 @@
                     </table>
                 </div>
             </section>
-            <section>
-                <div>
-                    <label>Página</label>
+            <section id="paginacao">
+                <div class="controle-paginacao">
+                    <label for="pagina">Página</label>
                     <select>
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
                     </select>
                 </div>
-                <div>
-                    <button>Voltar</button>
-                    <button>Próxomo</button>
+                <div class="conteiner-btn">
+                    <button id="btnVoltar" class="btn-voltar">Voltar</button>
+                    <button id="btnProximo" class="btn-proximo">Próxomo</button>
                     
                 </div>
             </section>
